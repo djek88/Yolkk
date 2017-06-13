@@ -2,20 +2,12 @@ import express from 'express';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import { isString } from 'lodash';
 import { createServer } from 'http';
+import config from '../config';
 
 import schema from './schema';
 
-// Arguments usually come from env vars
-export function run({
-  PORT: portFromEnv = 3010,
-} = {}) {
-  let port = portFromEnv;
-  if (isString(portFromEnv)) {
-    port = parseInt(portFromEnv, 10);
-  }
-
+export function run() {
   const app = express();
 
   app.use(cors());
@@ -45,8 +37,8 @@ export function run({
 
   const server = createServer(app);
 
-  server.listen(port, () => {
-    console.log(`API Server is now running on http://localhost:${port}`); // eslint-disable-line no-console
+  server.listen(config.server.port, () => {
+    console.log(`API Server is now running on http://localhost:${config.server.port}`); // eslint-disable-line no-console
   });
 
   return server;

@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "dev": "nodemon api/index.js --watch api --exec babel-node",
+    "start": "NODE_ENV=development nodemon api/index.js --exec babel-node",
+    "debug": "NODE_ENV=development nodemon api/index.js --exec babel-node --inspect --debug-brk",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Yevhen Zarubynskyi",
@@ -20,6 +21,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "body-parser": "^1.17.2",
     "cors": "^2.8.3",
+    "dotenv": "^4.0.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.2.0",
@@ -28,6 +30,7 @@
     "graphql-custom-types": "^0.7.3",
     "graphql-server-express": "^0.7.2",
     "graphql-tools": "^0.11.0",
+    "joi": "^10.5.2",
     "lodash": "^4.17.4"
   }
 }
