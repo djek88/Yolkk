@@ -13,12 +13,17 @@ const schema = makeExecutableSchema({
   logger: { log: e => console.error(e.stack) }, // eslint-disable-line no-console
 });
 
+const mocks = {
+  Email: () => 'test@email.ru',
+  DateTime: () => new Date(),
+};
+
 addMockFunctionsToSchema({
   schema,
-  mocks: {
-    Date: () => new Date(),
-  },
+  mocks,
   preserveResolvers: false,
 });
+
+schema._typeMap.Email._scalarConfig.serialize = () => mocks.Email(); // eslint-disable-line no-underscore-dangle, max-len
 
 export default schema;

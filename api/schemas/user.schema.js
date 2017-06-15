@@ -37,19 +37,27 @@ const UserSchema = `
   }
 
   enum USER_GENDER {
-
+    MALE
+    FAMALE
   }
 
   enum USER_LIFESTYLE {
-
+    SPORT
+    ACTIVE
+    NORMAL
+    PASSIVE
   }
 
   enum USER_BLOOD_TYPE {
-
+    FIRST
+    SECOND
+    THIRD
   }
 
   enum ANALYZE_RESULT_TYPE {
-
+    TYPE1
+    TYPE2
+    TYPE3
   }
 `;
 
