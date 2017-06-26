@@ -6,6 +6,10 @@ const User = {
   Date: GraphQLDateTime,
 
   User: {
+    // for argument testing purposes (i.e. responce not correct when email argument is not valid)
+    email(obj, { email }) {
+      return email;
+    },
   },
 };
 

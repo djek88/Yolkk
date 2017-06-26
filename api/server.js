@@ -1,5 +1,6 @@
 import express from 'express';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
+import { printSchema } from 'graphql/utilities/schemaPrinter';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import { createServer } from 'http';
@@ -13,6 +14,11 @@ export function run() {
   app.use(cors());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
+
+  app.use('/schema', (req, res) => {
+    res.set('Content-Type', 'text/plain');
+    res.send(printSchema(schema));
+  });
 
   app.use('/graphql', graphqlExpress((req) => {
     // Get the query, the same way express-graphql does it
@@ -28,18 +34,26 @@ export function run() {
       schema,
       context: {
       },
+      rootValue: {
+        rootTestProperty: 'rootTestProperty',
+      },
+      debug: config.env !== 'production',
     };
   }));
 
-  app.use('/graphiql', graphiqlExpress({
-    endpointURL: '/graphql',
-  }));
+  if (config.env !== 'production') {
+    app.use('/graphiql', graphiqlExpress({
+      endpointURL: '/graphql',
+    }));
+  }
 
   const server = createServer(app);
 
   server.listen(config.server.port, () => {
     console.log(`API Server is now running on http://localhost:${config.server.port}`); // eslint-disable-line no-console
   });
+
+  process.on('SIGTERM', () => server.close());
 
   return server;
 }

@@ -1,9 +1,8 @@
 import { merge } from 'lodash';
 
-import Author from './author.resolver';
-import Post from './post.resolver';
+import User from './user.resolver';
 
 const RootQuery = {
 };
 
-export default merge(RootQuery, Author, Post);
+export default merge(RootQuery, User);

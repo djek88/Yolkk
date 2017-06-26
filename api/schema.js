@@ -21,9 +21,7 @@ const mocks = {
 addMockFunctionsToSchema({
   schema,
   mocks,
-  preserveResolvers: false,
+  preserveResolvers: true,
 });
-
-schema._typeMap.Email._scalarConfig.serialize = () => mocks.Email(); // eslint-disable-line no-underscore-dangle, max-len
 
 export default schema;

@@ -1,12 +1,14 @@
+import { User } from '../models';
+
 const UserSchema = `
   scalar Email
   scalar Date
 
   type User {
-    id: String!
+    id: ID!
     firstName: String
     lastName: String
-    email: Email!
+    email(email: Email!): Email!
     gender: USER_GENDER!
     height: Float!
     weight: Float!
@@ -37,21 +39,15 @@ const UserSchema = `
   }
 
   enum USER_GENDER {
-    MALE
-    FAMALE
+    ${User.GENDER.join(' ')}
   }
 
   enum USER_LIFESTYLE {
-    SPORT
-    ACTIVE
-    NORMAL
-    PASSIVE
+    ${User.LIFESTYLE.join(' ')}
   }
 
   enum USER_BLOOD_TYPE {
-    FIRST
-    SECOND
-    THIRD
+    ${User.BLOOD_TYPE.join(' ')}
   }
 
   enum ANALYZE_RESULT_TYPE {
