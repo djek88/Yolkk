@@ -67,7 +67,7 @@ const Schema = new mongoose.Schema({
 });
 
 const User = mongoose.model('User', Schema);
-User.GENDER = GENDER;
+User.GENDER = GENDER; // try Schema.statics.GENDER = GENDER;
 User.LIFESTYLE = LIFESTYLE;
 User.BLOOD_TYPE = BLOOD_TYPE;
 
